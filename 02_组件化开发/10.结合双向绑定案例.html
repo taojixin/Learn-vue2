@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- :number1="num1"用于父传子， @num1change="num1change"用于子传父-->
+        <cpn :number1="num1" 
+             :number2="num2" 
+             @num1change="num1change"
+             @num2change="num2change"></cpn>
+    </div>
+
+    <template id="temp">
+        <div>
+            <h2>props:{{number1}}</h2>
+            <h2>data:{{dnumber1}}</h2>
+            <!-- <input type="text" v-model="dnumber1"> -->
+            <!-- :value="dnumber1" 用于将表单内容和props内容绑定 ；@input="num1Input" 用于监听当表单内容改变时执行事件num1Input（当表单内容改变时props内容改变，同时发射事件用于改版顶层data数据） -->
+            <input type="text" :value="dnumber1" @input="num1Input">
+            <h2>props:{{number2}}</h2>
+            <h2>data:{{dnumber2}}</h2>
+            <!-- <input type="text" v-model="dnumber2"> -->
+            <input type="text" :value="dnumber2" @input="num2Input">
+        </div>
+    </template>
+    <script>
+        // 1.先将父组件中的数据num1,num2传到子组件中去，并显示到input表单中去（父传子）
+        // 2.父组件中的data和子组件input内容绑定(子传父)
+
+
+
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                num1: 1,
+                num2: 0
+            },
+            methods: {
+                num1change(value) {
+                    this.num1 = parseFloat(value);//因为num1,num2要传给子组件，子组件的props接受类型设置为了Number所以这里需要数据类型转换
+                },
+                num2change(value) {
+                    this.num2 = parseFloat(value);
+                }
+            },
+            components: {
+                cpn: {
+                    template:"#temp",
+                    // props应该只保留父组件传过来的值，不能改变，只能通过父组件的传值改变
+                    props: {
+                        number1: Number,
+                        number2: Number
+                    },
+                    data() {
+                        return {
+                            dnumber1: this.number1,//用于保存由父组件传过来的num1
+                            dnumber2: this.number2,//用于保存由父组件传过来的num2
+                        }
+                    },
+                    methods: {
+                        num1Input(event) {
+                            this.dnumber1 = event.target.value;
+                            this.$emit("num1change", this.dnumber1);
+                        },
+                        num2Input(event) {
+                            this.dnumber2 = event.target.value;
+                            this.$emit("num2change", this.dnumber2);
+                        }
+                    }
+                }
+            }
+        })
+
+    Vue.config.productionTip = false
+    </script>
+</body>
+
+</html>

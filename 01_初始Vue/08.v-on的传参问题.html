@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div class="root">
+        <!-- 括号可以加可以不加 -->
+        <button v-on:click="printf()">1</button>
+        <button v-on:click="printf">1</button>
+        <!-- 若没有传递参数，则默认event事件 -->
+        <button @click="printf2">2</button>
+        <!-- 没有传递参数时，第一个参数默认event，第二个undefined -->
+        <button @click="printf3">3</button>
+        <!-- 当第一个参数传入了，第二个参数event不为事件 -->
+        <button @click="printf3(1)">3</button>
+        <!-- 此时两个参数都为event事件 -->
+        <button @click="printf4">4</button>
+        <button @click="printf4(1)">4</button>
+        <!-- 第二个参数传入无效，依然为event事件 -->
+        <button @click="printf4(1,1)">4</button>
+
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el:".root",
+            data:{
+
+            },
+            methods:{
+                printf(){
+                    console.log("------------");
+                },
+                printf2(a){
+                    console.log(a);
+                },
+                printf3(a,event){
+                    console.log(a);
+                    console.log(event);
+                },
+                printf4(a,$event){
+                    console.log(a);
+                    console.log(event);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

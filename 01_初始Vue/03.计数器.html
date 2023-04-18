@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="root">
+        当前计数:{{count}}
+        <!-- <button v-on:click="count++">+</button>
+        <button @click="count--">-</button> -->
+        <button v-on:click="sun">+</button>
+        <button @click="sub">-</button>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el:".root",
+            data:{
+                count:0
+            },
+            methods:{
+                sun:function(){
+                    this.count++;
+                    console.log("count增加了");
+                },
+                sub:function(){
+                    this.count--;
+                    console.log("count减少了");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

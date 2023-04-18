@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 驼峰标识，这里需要使用c-message的形式 -->
+        <cpn :c-message="message"></cpn>
+    </div>
+
+
+    <template id="temp">
+        <div>
+            <!-- 这里直接驼峰标识就可以了，不用c-message的形式 -->
+            <h2>{{cMessage}}</h2>
+            <h2>{{cMessage}}</h2>
+        </div>
+    </template>
+    <script>
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: [12,21,312]
+            },
+            components:{
+                cpn:{
+                    template:"#temp",//又一次忘了#
+                    props:{
+                        cMessage: {
+                            type: Array,
+                            default() {
+                                return "默认值"
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+    Vue.config.productionTip = false
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- cpnclick这里省略参数后，默认将item传过去 -->
+        <!-- 父组件监听子组件发射的itemclick事件，当收到子组件发射的自定义事件(itemclick事件)后执行事件cpnclick -->
+        <cpn v-on:itemClick="cpnclick"></cpn>
+    </div>
+
+
+    <template id="temp">
+        <div>
+            <!-- 当点击了按钮触发btnclicl事件，btnclick(item)事件的作用是将自定义事件发射给父组件 -->
+            <button v-for="item in choice" @click="btnclick(item)">{{item.name}}</button>
+        </div>
+    </template>
+    <script>
+        //子组件
+        const cpn = {
+            template:"#temp",
+            data() {
+                return {
+                    choice:[
+                    {id: 'aaa', name: '热门推荐'},
+                    {id: 'bbb', name: '手机数码'},
+                    {id: 'ccc', name: '家用电器'},
+                    {id: 'ddd', name: '电脑办公'},
+                    ]
+                }
+            },
+            methods: {
+                btnclick(item) {
+                    // 发射事件(itemclick)给父组件
+                    this.$emit('itemclick',item);//itemclick事件名称，itemclick为自定义事件,item为传递的参数
+                }
+            }
+        }
+
+
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                
+            },
+            components: {
+                cpn
+            },
+            methods: {
+                cpnclick(item) {
+                    console.log(item);
+                }
+            }
+        })
+
+    Vue.config.productionTip = false
+    </script>
+</body>
+
+</html>

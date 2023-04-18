@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+    </div>
+
+    <!-- 方法1：<script type="text/x-template" id="temp"> -->
+    <!-- <script type="text/x-template" id="temp">
+        <div>
+            <h2>标题</h2>
+            <p>内容</p>
+        </div>
+    </script> -->
+
+    <!-- 方法2： -->
+    <template id="temp">
+        <div>
+            <h2>标题</h2>
+            <p>内容</p>
+        </div>
+    </template>
+    
+    <script>
+        Vue.component("cpn",{
+            template:"#temp"
+        })
+
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                
+            },
+        })
+
+    Vue.config.productionTip = false
+    </script>
+</body>
+
+</html>

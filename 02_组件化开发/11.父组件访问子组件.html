@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn ref="aaa"></cpn>
+        <button @click="btnClick">按钮</button>
+    </div>
+
+    <template id="temp">
+        <div>我是子组件</div>
+    </template>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: "你好啊"
+            },
+            methods: {
+                btnClick() {
+                    // 1.$children （开发中很少用）
+                    // console.log(this.$children);
+                    // for (let c of this.$children) {
+                    //     console.log(c.name);
+                    //     c.showMessage();
+                    // }
+
+                    // 2.$refs（开发中几乎都用这个方法）
+                    console.log(this.$refs.aaa.name);
+
+                }
+            },
+            components:{
+                cpn: {
+                    template:"#temp",
+                    methods: {
+                        showMessage() {
+                            console.log("showMessage")
+                        }
+                    },
+                    data() {
+                        return {
+                            name: "我是子组件的name"
+                        }
+                    }
+                }
+            }
+        })
+
+    Vue.config.productionTip = false
+    </script>
+</body>
+
+</html>

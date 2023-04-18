@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+             内容
+        </div>
+        <cpn v-bind:cmovies="movies" ></cpn>
+    </div>
+
+    <template id="temp">
+        <!-- div不能省略 -->
+        <div>
+            <p>{{cmessage}}</p>
+            <p>{{cmovies}}</p>
+            <ul>
+                <li v-for="item in cmovies">{{item}}</li>
+            </ul>
+        </div>
+    </template>
+
+    <script>
+        // const cpn = Vue.extend({
+        //     template:"#temp",  //此处#忘记加了
+        //     data() {
+        //         return {}
+        //     },
+        //     props:["cmovies","cmessage"],
+        // });
+        // 可以简写为
+        const cpn = {
+            template:"#temp",  //此处#忘记加了
+            data() {
+                return {}
+            },
+            // 方式一：字符串数组，数组中的字符串就是传递时的名称。
+            // props:["cmovies","cmessage"],
+            // 方式二：对象，对象可以设置传递时的类型，也可以设置默认值等。
+            props:{
+                // 1.类型限制
+                cmovies: Array,
+                cmessage: String,
+                
+                // 2.可以是多个可能的类型
+                // cmessage: [String,Number]
+
+                // 3.提供一些默认值
+                // cmessage:{
+                //     type: String,
+                //     default: "aaaaaaaa"
+                // }
+
+                // 4.必须传递值
+                // cmessage:{
+                //     type: String,
+                //     required: true,
+                // }
+
+                // 5.type是对象或数组时必须从工厂函数获取
+                // cmessage: {
+                //     type: Object,
+                //     default() {//这里必须是工厂函数
+                //        return {
+                //            cmessage:"hello"
+                //        } 
+                //     }
+                // }
+
+                // 6.自定义验证函数
+            }
+
+        }
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                movies:["该往","发生的反对","范德萨"],
+                message: "sfd"
+            },
+            components:{
+                cpn
+                // 也可以写成
+                // cpn:{
+                //     template:"#temp",  //此处#忘记加了
+                //     data() {
+                //         return {}
+                //     },
+                //     props:["cmovies","cmessage"],
+                // }
+            }
+            
+            
+        })
+
+    Vue.config.productionTip = false
+    </script>
+</body>
+
+</html>

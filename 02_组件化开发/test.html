@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>vue </title>
+    
+</head>
+<body>
+    <div id="app">
+        <!-- <p>{{msg}}</p> -->
+        <cpn></cpn>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // 创建组件构造器 
+        const cpnC = Vue.extend({
+            template:`
+                <div>
+                    <h2>我是标题</h2>
+                    <p>我是内容，哈哈哈哈</p>
+                    <p>我是内容，呵呵呵呵呵</p>
+                </div>
+            `
+        })
+        // 注册组件
+        // Vue.component('my-cpn',cpnC)
+        const vw = new Vue({
+            el:'#app',
+            data:{
+                msg:'你好啊'
+            },
+            components:{
+                cpn:cpnC
+            }
+        })
+    </script>
+
+    <!-- 父组件模板
+    <div id="app">
+        <child-cpn @increment="changeTotal" @decrement="chandeTotal"></child-cpn>
+        <h2>点击次数：{{total}}</h2>
+    </div>
+    
+    子组件模板
+    <template id="childCpn">
+        <div>
+            <button @click="increment">+1</button>
+            <button @click="decrement">-1</button>
+        </div>
+    </template>
+    <script src="js/vue.js"></script>
+    <script>
+        // 根组件
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                total:0
+            },
+            methods:{
+                changeTotal(counter) {
+                    this.total = counter
+                }
+            },
+            // 子组件
+            components: {
+                template:'#childCpn',
+                data(){
+                    return {
+                        counter:0
+                    }
+                },
+                methods: {
+                    increment() {
+                        this.counter++;
+                        this.$emit('increment',this.counter)
+                    },
+                    decrement() {
+                        this.counter--;
+                        this.$emit('decrement',this.counter)
+                    }
+                }
+            }
+            
+        })
+    </script> -->
+</body>
+</html>

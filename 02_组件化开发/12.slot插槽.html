@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<!-- 1.插槽的基本使用
+     2.插槽的默认值
+     3.如果有很多个值，同时放到组件进行替换时，一起作为替换的元素
+-->
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn><button>按钮</button></cpn>
+        <cpn>
+            <!-- 3.如果有很多个值，同时放到组件进行替换时，一起作为替换的元素 -->
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+        </cpn>
+    </div>
+
+    <template id="temp">
+        <div>
+            <h2>我是组件</h2>
+            <p>我是组件，哈哈哈</p>
+            <!-- 2.插槽的默认值 -->
+            <slot><p>我是默认的</p></slot>
+        </div>
+    </template>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            components: {
+                cpn: {
+                    template: "#temp",
+                }
+            }
+        })
+
+    Vue.config.productionTip = false
+    </script>
+</body>
+
+</html>
